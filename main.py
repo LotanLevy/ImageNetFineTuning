@@ -52,7 +52,7 @@ def main():
         os.makedirs(args.output_path)
 
 
-    dataloader = DataLoader(args.train_path, args.val_path, args.test_path, args.cls_num, input_size=args.input_size,
+    dataloader = DataLoader(args.train_path, args.val_path, args.test_path, args.cls_num, args.input_size,
                             name="dataloader", output_path=args.output_path)
     network = utils.get_network(args.nntype)
     optimizer = tf.keras.optimizers.Adam(learning_rate=args.lr)

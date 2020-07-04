@@ -30,7 +30,7 @@ def read_dataset_map(data_map_path):
 
 class DataLoader:
 
-    def __init__(self, train_file, val_file, test_file, cls_num, input_size=MODEL_IMAGE_SIZE, name="dataloader",
+    def __init__(self, train_file, val_file, test_file, cls_num, input_size, name="dataloader",
                  output_path=os.getcwd()):
         self.classes_num = cls_num
         self.datasets = {"train": read_dataset_map(train_file),
