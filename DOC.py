@@ -13,17 +13,17 @@ from plots.plot_helpers import AOC_helper, plot_features, plot_dict
 
 
 class TestHelper:
-    def __init__(self, ref_dataloader, tar_dataloader, tamplates_num, test_num, model):
-        self.tamplates, _ = tar_dataloader.read_batch(tamplates_num, "train")
+    def __init__(self, ref_dataloader, tar_dataloader, templates_num, test_num, model):
+        self.templates, _ = tar_dataloader.read_batch(templates_num, "train")
         self.targets, _ = tar_dataloader.read_batch(test_num, "test")
         self.aliens, _ = ref_dataloader.read_batch(test_num, "test")
         self.model = model
 
     def get_roc_aoc(self):
-        return AOC_helper.get_roc_aoc(self.targets, self.aliens, self.tamplates, self.model)
+        return AOC_helper.get_roc_aoc(self.targets, self.aliens, self.templates, self.model)
 
     def plot_features(self, full_path):
-        plot_features(self.targets, self.aliens, self.tamplates, self.model, full_path)
+        plot_features(self.targets, self.aliens, self.templates, self.model, full_path)
 
 
 
@@ -102,7 +102,7 @@ def main():
     trainer = TrainTestHelper(network, optimizer, D_loss, C_loss, args.lambd, training=True)
     validator = TrainTestHelper(network, optimizer, D_loss, C_loss, args.lambd,training=False)
 
-    test_helper = TestHelper(ref_dataloader, tar_dataloader, args.tamplates_num, args.test_num, network)
+    test_helper = TestHelper(ref_dataloader, tar_dataloader, args.templates_num, args.test_num, network)
 
 
     train(ref_dataloader, tar_dataloader, trainer, validator, args.batchs_num, args.train_iterations,
