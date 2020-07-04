@@ -29,7 +29,7 @@ class TrainTestHelper:
                 # Descriptiveness loss
                 prediction = self.model(ref_inputs, training=self.training)
                 D_loss_value = self.D_loss_func(ref_labels, prediction)
-                self.loss_logger(D_loss_value)
+                self.D_loss_logger(D_loss_value)
 
                 # Compactness loss
                 prediction = self.model(tar_inputs, training=self.training)
