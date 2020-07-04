@@ -38,8 +38,8 @@ def get_imagenet_prediction(image, hot_vec,  network, loss_func):
     loss = loss_func(hot_vec, pred)
     return i, np.array(pred[0])[i], loss
 
-def save_predicted_results(test_images, labels, network, paths, loss_func, title):
-    with open(os.path.join(args.output_path, "{}.txt".format(title)), 'w') as f:
+def save_predicted_results(test_images, labels, network, paths, loss_func, title, output_path):
+    with open(os.path.join(output_path, "{}.txt".format(title)), 'w') as f:
         for i in range(len(test_images)):
             pred, score, loss = get_imagenet_prediction(test_images[i], labels[i], network, loss_func)
             f.write("{} {} {} {}\n".format(paths[i], pred, score, loss))
@@ -61,11 +61,11 @@ def main():
     validator = TrainTestHelper(network, optimizer, loss, training=False)
 
     test_images, labels = dataloader.read_batch(10, "test")
-    save_predicted_results(test_images, labels, network, dataloader.paths_logger["test"], loss, "before_training")
+    save_predicted_results(test_images, labels, network, dataloader.paths_logger["test"], loss, "before_training", args.output_path)
 
 
     train(dataloader, trainer, validator, args.batchs_num, args.train_iterations, args.print_freq)
-    save_predicted_results(test_images, labels, network, dataloader.paths_logger["test"], loss, "after_training")
+    save_predicted_results(test_images, labels, network, dataloader.paths_logger["test"], loss, "after_training", args.output_path)
 
 
 
