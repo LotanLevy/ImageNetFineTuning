@@ -15,6 +15,8 @@ def get_args():
     parser.add_argument('--print_freq', '-pf', type=int, default=10)
     parser.add_argument('--lr', type=float, default=5e-5, help='learning rate')
     parser.add_argument('--batchs_num', '-bs', type=int, default=2, help='number of batches')
+    parser.add_argument('--train_iterations', '-iter', type=int, default=800, help='The maximum iterations for learning')
+
     return parser.parse_args()
 
 
