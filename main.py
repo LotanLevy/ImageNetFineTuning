@@ -24,7 +24,7 @@ def train(dataloader, trainer, validator, batches, max_iteration, print_freq):
         batch_x, batch_y = dataloader.read_batch(batches, "train")
         trainstep(batch_x, batch_y)
         if i % print_freq == 0:  # validation loss
-            batch_x, batch_y = dataloader.read_batch(batches, "train")
+            batch_x, batch_y = dataloader.read_batch(batches, "val")
             valstep(batch_x, batch_y)
 
             train_dict["iteration"].append(i)
@@ -56,7 +56,7 @@ def main():
     dataloader = DataLoader(args.train_path, args.val_path, args.test_path, args.cls_num, args.input_size,
                             name="dataloader", output_path=args.output_path)
     network = utils.get_network(args.nntype)
-    network.freeze_layers((15, 19))
+    network.freeze_layers(19)
     optimizer = tf.keras.optimizers.Adam(learning_rate=args.lr)
     loss = tf.keras.losses.SparseCategoricalCrossentropy()
     trainer = TrainTestHelper(network, optimizer, loss, training=True)

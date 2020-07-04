@@ -22,10 +22,10 @@ class PerceptualModel(NNInterface):
     def compute_output_shape(self, input_shape):
         return self.__model.compute_output_shape(input_shape)
 
-    def freeze_layers(self, freeze_range):
+    def freeze_layers(self, freeze_idx):
 
         for i, layer in enumerate(self.__model.layers):
-            if freeze_range[0] > i:
+            if freeze_idx > i:
                 layer.trainable = False
 
         for i, layer in enumerate(self.__model.layers):
