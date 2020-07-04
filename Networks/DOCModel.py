@@ -10,7 +10,7 @@ from tensorflow.python.keras.models import Model
 import tensorflow as tf
 
 
-class PerceptualModel(NNInterface):
+class DOCModel(NNInterface):
     def __init__(self):
         super().__init__()
         self.__model = vgg16.VGG16(weights='imagenet')
