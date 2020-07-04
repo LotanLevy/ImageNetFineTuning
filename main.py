@@ -24,7 +24,7 @@ def train(dataloader, trainer, validator, batches, max_iteration, print_freq):
         batch_x, batch_y = dataloader.read_batch(batches, "train")
         trainstep(batch_x, batch_y)
         if i % print_freq == 0:  # validation loss
-            batch_x, batch_y = dataloader.read_batch(batches, "val")
+            batch_x, batch_y = dataloader.read_batch(batches, "train")
             valstep(batch_x, batch_y)
 
             train_dict["iteration"].append(i)
