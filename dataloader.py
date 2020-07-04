@@ -51,7 +51,7 @@ class DataLoader:
         all_paths, all_labels = self.datasets[mode]
         rand_idx = np.random.randint(low=0, high=len(all_paths)-1, size=batch_size).astype(np.int)
 
-        batch_labels = tf.keras.utils.to_categorical(all_labels[rand_idx], num_classes=self.classes_num)
+        batch_labels = all_labels[rand_idx]
         batch_images = np.zeros((batch_size, self.input_size[0], self.input_size[1], 3))
         b_idx = 0
         for i in rand_idx:

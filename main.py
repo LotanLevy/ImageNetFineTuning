@@ -57,7 +57,7 @@ def main():
                             name="dataloader", output_path=args.output_path)
     network = utils.get_network(args.nntype)
     optimizer = tf.keras.optimizers.Adam(learning_rate=args.lr)
-    loss = tf.keras.losses.CategoricalCrossentropy()
+    loss = tf.keras.losses.SparseCategoricalCrossentropy()
     trainer = TrainTestHelper(network, optimizer, loss, training=True)
     validator = TrainTestHelper(network, optimizer, loss, training=False)
 
