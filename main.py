@@ -47,6 +47,7 @@ def save_predicted_results(test_images, labels, network, paths, loss_func, title
 
 
 def main():
+    tf.keras.backend.set_floatx('float32')
     args = configurations.get_args()
     if not os.path.exists(args.output_path):
         os.makedirs(args.output_path)
