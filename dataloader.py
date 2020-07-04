@@ -11,10 +11,12 @@ SPLIT_FACTOR = "$"
 
 def read_image(path, resize_image=()):
     image = Image.open(path, 'r')
+    if image.mode != 'RGB':
+        image = image.convert('RGB')
     if len(resize_image) > 0:
         image = image.resize(resize_image, Image.NEAREST)
     image = np.array(image).astype(np.float32)
-    return image[np.newaxis, ...]
+    return image
 
 def read_dataset_map(data_map_path):
     with open(data_map_path, "r") as lf:
