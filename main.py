@@ -28,7 +28,7 @@ def train(dataloader, trainer, validator, batches, max_iteration, print_freq):
             valstep(batch_x, batch_y)
 
             train_dict["iteration"].append(i)
-            train_dict["loss"].append(float(validator.result()))
+            train_dict["loss"].append(float(validator.loss_logger.result()))
             print("iteration {} - loss {}".format(i + 1, train_dict["loss"][-1]))
 
 
