@@ -7,12 +7,11 @@ from tensorflow.python.keras.applications import vgg16
 
 import tensorflow as tf
 
-IMG_SIZE = 160 # All images will be resized to 160x160
 
 class PerceptualModel(NNInterface):
-    def __init__(self, img_size):
+    def __init__(self):
         super().__init__()
-        self.__model = vgg16.VGG16(input_shape=(img_size[0], img_size[1], 3))
+        self.__model = vgg16.VGG16()
 
     def call(self, inputs):
         return self.__model(vgg16.preprocess_input(inputs))
