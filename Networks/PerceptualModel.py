@@ -25,8 +25,8 @@ class PerceptualModel(NNInterface):
     def freeze_layers(self, freeze_range):
 
         for i, layer in enumerate(self.__model.layers):
-            if freeze_range[0] > i :
+            if freeze_range[0] > i:
                 layer.trainable = False
 
-        for i, layer in enumerate(self.network.layers):
+        for i, layer in enumerate(self.__model.layers):
             print("layer {} is trainable {}".format(layer.name, layer.trainable))
