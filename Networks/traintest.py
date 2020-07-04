@@ -27,8 +27,8 @@ class TrainTestHelper:
                 self.loss_logger(loss_value)
 
             if self.training:
-                grads = tape.gradient(loss_value, self.model.trainable_weights)
-                self.optimizer.apply_gradients(zip(grads, self.model.trainable_weights))
+                grads = tape.gradient(loss_value, self.model.trainable_variables)
+                self.optimizer.apply_gradients(zip(grads, self.model.trainable_variables))
         return train_step
 
 
