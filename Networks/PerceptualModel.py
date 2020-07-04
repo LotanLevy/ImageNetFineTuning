@@ -13,8 +13,8 @@ class PerceptualModel(NNInterface):
         super().__init__()
         self.__model = vgg16.VGG16()
 
-    def call(self, inputs):
-        return self.__model(vgg16.preprocess_input(inputs))
+    def call(self, inputs, training=True):
+        return self.__model(vgg16.preprocess_input(inputs), training=training)
 
     def compute_output_shape(self, input_shape):
         return self.__model.compute_output_shape(input_shape)
