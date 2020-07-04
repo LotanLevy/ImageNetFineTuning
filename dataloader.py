@@ -33,9 +33,6 @@ class DataLoader:
     def __init__(self, train_file, val_file, test_file, cls_num, input_size, name="dataloader",
                  output_path=os.getcwd()):
         self.classes_num = cls_num
-        self.datasets = {"train": read_dataset_map(train_file),
-                       "val": read_dataset_map(val_file),
-                       "test": read_dataset_map(test_file)}
         self.input_size = input_size
 
         self.name = name
@@ -43,16 +40,23 @@ class DataLoader:
         self.paths_logger = {"train": [], "val": [], "test": []}
         self.labels_logger = {"train": [], "val": [], "test": []}
 
+        self.datasets = {"train": read_dataset_map(train_file),
+                       "val": read_dataset_map(val_file),
+                       "test": read_dataset_map(test_file)}
+
+
     def read_batch(self, batch_size, mode):
         all_paths, all_labels = self.datasets[mode]
         rand_idx = np.random.randint(low=0, high=len(all_paths)-1, size=batch_size).astype(np.int)
 
         batch_labels = tf.keras.utils.to_categorical(all_labels[rand_idx])
         batch_images = np.zeros((batch_size, self.input_size[0], self.input_size[1], 3))
+        b_idx = 0
         for i in rand_idx:
-            batch_images[i, :, :, :] = read_image(all_paths[i], self.input_size)
+            batch_images[b_idx, :, :, :] = read_image(all_paths[i], self.input_size)
             self.paths_logger[mode].append(all_paths[i])
             self.labels_logger[mode].append(all_labels[i])
+            b_idx += 1
         return batch_images, batch_labels
 
     def __del__(self):
