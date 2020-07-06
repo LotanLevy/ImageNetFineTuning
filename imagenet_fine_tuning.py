@@ -39,9 +39,14 @@ def get_imagenet_prediction(image, hot_vec,  network, loss_func):
 
 def save_predicted_results(test_images, labels, network, paths, loss_func, title, output_path):
     with open(os.path.join(output_path, "{}.txt".format(title)), 'w') as f:
+        correct_sum = 0
         for i in range(len(test_images)):
             pred, score, loss = get_imagenet_prediction(test_images[i][np.newaxis, :,:,:], labels[i], network, loss_func)
             f.write("{} {} {} {}\n".format(paths[i], pred, score, loss))
+            if int(pred) == int(labels[i]):
+                correct_sum += 1
+        f.write("correctness {}\n".format(correct_sum/len(test_images)))
+
 
 
 def get_args():
