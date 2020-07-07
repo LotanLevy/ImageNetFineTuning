@@ -6,6 +6,7 @@ import os
 from dataloader import DataLoader
 import utils
 from Networks.imagenet_traintest import TrainTestHelper
+import argparse
 
 
 
@@ -82,7 +83,7 @@ def main():
     trainer = TrainTestHelper(network, optimizer, loss, training=True)
     validator = TrainTestHelper(network, optimizer, loss, training=False)
 
-    test_images, labels = dataloader.read_batch(10, "test")
+    test_images, labels = dataloader.read_batch(200, "test")
     save_predicted_results(test_images, labels, network, dataloader.paths_logger["test"], loss, "before_training", args.output_path)
 
 
